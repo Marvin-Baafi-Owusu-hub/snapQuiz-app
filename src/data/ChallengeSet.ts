@@ -9,8 +9,8 @@ export const ITChallengeQuestions: Question[] = [
     { 
         id: 1, 
         text: "What is often called the 'Brain' of the computer because it performs all the calculations?", 
-        options: ["CPU (Processor)", "RAM (Memory)", "Hard Drive", "Monitor"], 
-        answer: "CPU (Processor)" 
+        options: ["CPU", "RAM", "Hard Drive", "Monitor"], 
+        answer: "CPU" 
     },
     { 
         id: 2, 
@@ -21,7 +21,7 @@ export const ITChallengeQuestions: Question[] = [
     { 
         id: 3, 
         text: "What does 'WWW' stand for in a website address?", 
-        options: ["World Wide Web", "Western Web Works", "World Wide Windows", "Wide Web Wire"], 
+        options: [ "World Wide Windows", "Western Web Works", "World Wide Web", "Wide Web Wire"], 
         answer: "World Wide Web" 
     },
     { 
@@ -39,13 +39,13 @@ export const ITChallengeQuestions: Question[] = [
     { 
         id: 6, 
         text: "Which device connects multiple computers together to share an internet connection in a home?", 
-        options: ["Router", "Keyboard", "Scanner", "Printer"], 
+        options: ["Keyboard", "Router", "Scanner", "Printer"], 
         answer: "Router" 
     },
     { 
         id: 7, 
         text: "Where is data stored when you save it 'to the Cloud'?", 
-        options: ["On remote servers accessed via the internet", "Inside your computer's screen", "On a satellite in space", "In the air around your computer"], 
+        options: [ "In the air around your computer", "Inside your computer's screen", "On a satellite in space", "On remote servers accessed via the internet"], 
         answer: "On remote servers accessed via the internet" 
     },
     { 
@@ -57,7 +57,7 @@ export const ITChallengeQuestions: Question[] = [
     { 
         id: 9, 
         text: "Which of these is an example of an 'Operating System'?", 
-        options: ["Windows", "Google Search", "Facebook", "Microsoft Word"], 
+        options: ["Google Search", "Windows", "Facebook", "Microsoft Word"], 
         answer: "Windows" 
     },
     { 
