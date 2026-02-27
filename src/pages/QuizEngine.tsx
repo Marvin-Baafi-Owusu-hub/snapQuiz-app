@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { TypeScriptQuestions } from '../data/ChallengeSet';
+import { ITChallengeQuestions } from '../data/ChallengeSet';
 import { ProgressTracker } from '../components/ProgressTracker';
 import { CountdownClock } from '../components/CountdownClock';
 import { useChallengeVault } from '../hooks/useChallengeVault';
@@ -17,8 +17,8 @@ export const QuizEngine = () => {
   }, [isComplete, score, navigate]);
 
   const handleAnswer = (selectedOption: string) => {
-    const isCorrect = selectedOption === TypeScriptQuestions[currentStep].answer;
-    recordAnswer(isCorrect, TypeScriptQuestions.length);
+    const isCorrect = selectedOption === ITChallengeQuestions[currentStep].answer;
+    recordAnswer(isCorrect, ITChallengeQuestions.length);
   };
 
   return (
@@ -35,7 +35,7 @@ export const QuizEngine = () => {
         </header>
 
         {/* PROGRESS BAR MOVED HERE (Horizontal Top) */}
-        <ProgressTracker current={currentStep} total={TypeScriptQuestions.length} />
+        <ProgressTracker current={currentStep} total={ITChallengeQuestions.length} />
 
         <AnimatePresence mode="wait">
           <motion.div 
@@ -49,11 +49,11 @@ export const QuizEngine = () => {
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/10 blur-[80px] rounded-full" />
             
             <h2 className="text-xl md:text-2xl font-bold mb-8 leading-tight relative z-10">
-              {TypeScriptQuestions[currentStep].text}
+              {ITChallengeQuestions[currentStep].text}
             </h2>
             
             <div className="grid gap-3 relative z-10">
-              {TypeScriptQuestions[currentStep].options.map((opt) => (
+              {ITChallengeQuestions[currentStep].options.map((opt) => (
                 <button 
                   key={opt}
                   onClick={() => handleAnswer(opt)}
