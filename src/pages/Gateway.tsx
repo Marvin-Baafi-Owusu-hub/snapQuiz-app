@@ -5,9 +5,6 @@ import { ShieldCheck, Cpu, Smartphone } from 'lucide-react';
 export const Gateway = () => {
     const navigate = useNavigate();
 
-    /** * This automatically detects your hosted URL.
-     * When live, it will be: https://snap-quiz-app.vercel.app/
-     */
     const quizUrl = window.location.origin; 
 
     const handleStart = () => {
@@ -50,9 +47,8 @@ export const Gateway = () => {
 
                     <div className="flex flex-col items-center justify-center gap-1 text-slate-500 text-[10px] uppercase tracking-widest">
                         <div className="flex items-center gap-2">
-                           <Smartphone size={12} />
-                           {/* Replaced hardcoded IP with the actual live URL for the user */}
-                           <span>Secure Link: snap-quiz-app.vercel.app</span>
+                            <Smartphone size={12} />
+                            <span>Secure Link: snap-quiz-app.vercel.app</span>
                         </div>
                     </div>
                 </div>
