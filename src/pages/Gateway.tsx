@@ -5,16 +5,24 @@ import { Copy, Check, Share2 } from 'lucide-react';
 export const Gateway = () => {
     const [copied, setCopied] = useState(false);
     
-    // The link we want the mobile user to open
-    const mobileUrl = `${window.location.origin}/unlock`; 
+    const baseUrl = window.location.origin && window.location.origin !== 'null' 
+        ? window.location.origin : 'https://snap-quiz-app.vercel.app';
+  
+    const mobileUrl = `${baseUrl}/unlock`; 
 
     const copyToClipboard = async () => {
         try {
             await navigator.clipboard.writeText(mobileUrl);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        } catch (err) {
-            console.error('Failed to copy!', err);
+        } catch {
+            const textArea = document.createElement("textarea");
+            textArea.value = mobileUrl;
+            document.body.appendChild(textArea);
+            textArea.select();
+await       navigator.clipboard.writeText(mobileUrl);            document.body.removeChild(textArea);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
         }
     };
 
@@ -23,10 +31,10 @@ export const Gateway = () => {
             <div className="max-w-sm w-full bg-slate-900 border border-slate-800 p-10 rounded-[3rem] shadow-2xl text-center space-y-8">
                 
                 <div className="space-y-2">
-                    <h1 className="text-3xl font-black text-white tracking-tighter">
-                        SNAP <span className="text-cyan-400">QUIZ</span>
+                    <h1 className="text-3xl font-black text-white tracking-tighter text-center">
+                        SNAP <span className="text-cyan-400 text-center">QUIZ</span>
                     </h1>
-                    <p className="text-slate-500 text-xs uppercase tracking-[0.2em]">Host Broadcast Mode</p>
+                    <p className="text-slate-500 text-xs uppercase tracking-[0.2em] text-center">Host Broadcast Mode</p>
                 </div>
 
                 {/* THE QR CODE */}
@@ -40,7 +48,7 @@ export const Gateway = () => {
                 </div>
 
                 <div className="space-y-4">
-                    <p className="text-slate-400 text-sm px-4">
+                    <p className="text-slate-400 text-sm px-4 text-center">
                         Scan with your mobile device or copy the link to share.
                     </p>
 
@@ -60,7 +68,7 @@ export const Gateway = () => {
 
                 <div className="pt-4 flex items-center justify-center gap-2 text-slate-600">
                     <Share2 size={14} />
-                    <span className="text-[10px] font-mono break-all">{mobileUrl}</span>
+                    <span className="text-[10px] font-mono break-all text-center">{mobileUrl}</span>
                 </div>
             </div>
         </div>
