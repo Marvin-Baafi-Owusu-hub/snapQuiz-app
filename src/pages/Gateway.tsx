@@ -1,57 +1,66 @@
+import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Cpu, Smartphone } from 'lucide-react';
+import { Copy, Check, Share2 } from 'lucide-react';
 
 export const Gateway = () => {
-    const navigate = useNavigate();
+    const [copied, setCopied] = useState(false);
+    
+    // The link we want the mobile user to open
+    const mobileUrl = `${window.location.origin}/unlock`; 
 
-    // Strategy: The QR code now points directly to the PIN entry page
-    // Example: https://snap-quiz-app.vercel.app/unlock
-    const quizUrl = `${window.location.origin}/unlock`; 
-
-    const handleStart = () => {
-        // If someone wants to play on the laptop, they can still click this
-        navigate('/unlock');
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(mobileUrl);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy!', err);
+        }
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4">
-            <div className="max-w-md w-full text-center space-y-8 bg-slate-900 p-10 rounded-[2.5rem] border border-slate-800 shadow-2xl">
+        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 font-sans">
+            <div className="max-w-sm w-full bg-slate-900 border border-slate-800 p-10 rounded-[3rem] shadow-2xl text-center space-y-8">
                 
-                <div className="bg-cyan-500/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto border border-cyan-500/20">
-                    <ShieldCheck className="text-cyan-400" size={40} />
+                <div className="space-y-2">
+                    <h1 className="text-3xl font-black text-white tracking-tighter">
+                        SNAP <span className="text-cyan-400">QUIZ</span>
+                    </h1>
+                    <p className="text-slate-500 text-xs uppercase tracking-[0.2em]">Host Broadcast Mode</p>
                 </div>
 
-                <h1 className="text-4xl font-black text-white tracking-tight">
-                    SNAP <span className="text-cyan-400">QUIZ</span>
-                </h1>
-
-                <p className="text-slate-400 text-sm">
-                    Scan with your mobile device to enter the <span className="text-cyan-400 font-bold">Secret Key</span> and begin.
-                </p>
-
-                {/* The QR Code - Directing to /unlock */}
-                <div className="bg-white p-5 rounded-3xl inline-block shadow-[0_0_50px_rgba(34,211,238,0.2)]">
+                {/* THE QR CODE */}
+                <div className="bg-white p-6 rounded-[2.5rem] inline-block shadow-[0_0_60px_rgba(34,211,238,0.15)] transform hover:scale-105 transition-transform duration-500">
                     <QRCodeSVG
-                        value={quizUrl}
-                        size={200}
+                        value={mobileUrl}
+                        size={220}
                         level="H"
-                        marginSize={4} 
+                        marginSize={2} 
                     />
                 </div>
 
-                <div className="space-y-4 pt-4">
-                    <button 
-                        onClick={handleStart}
-                        className="w-full py-4 bg-linear-to-r from-cyan-600 to-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all"
-                    >
-                        <Cpu size={20} /> Use This Device
-                    </button>
+                <div className="space-y-4">
+                    <p className="text-slate-400 text-sm px-4">
+                        Scan with your mobile device or copy the link to share.
+                    </p>
 
-                    <div className="flex items-center justify-center gap-2 text-slate-500 text-[10px] uppercase tracking-widest">
-                        <Smartphone size={12} />
-                        <span>Remote Access: {window.location.hostname}/unlock</span>
-                    </div>
+                    {/* COPY BUTTON */}
+                    <button 
+                        onClick={copyToClipboard}
+                        className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all ${
+                            copied 
+                            ? 'bg-green-500/20 text-green-400 border border-green-500/50' 
+                            : 'bg-slate-800 text-white hover:bg-slate-700 border border-slate-700'
+                        }`}
+                    >
+                        {copied ? <Check size={18} /> : <Copy size={18} />}
+                        {copied ? 'LINK COPIED' : 'COPY SESSION LINK'}
+                    </button>
+                </div>
+
+                <div className="pt-4 flex items-center justify-center gap-2 text-slate-600">
+                    <Share2 size={14} />
+                    <span className="text-[10px] font-mono break-all">{mobileUrl}</span>
                 </div>
             </div>
         </div>
