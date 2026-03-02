@@ -20,7 +20,7 @@ export const Gateway = () => {
             textArea.value = mobileUrl;
             document.body.appendChild(textArea);
             textArea.select();
-await       navigator.clipboard.writeText(mobileUrl);            document.body.removeChild(textArea);
+            await navigator.clipboard.writeText(mobileUrl);            document.body.removeChild(textArea);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         }
