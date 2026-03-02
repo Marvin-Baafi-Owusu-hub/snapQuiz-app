@@ -5,10 +5,10 @@ import { ShieldCheck, Cpu, Smartphone } from 'lucide-react';
 export const Gateway = () => {
     const navigate = useNavigate();
 
-    const myIP = "192.168.31.137";
-    const port = "5173";
-
-    const quizUrl = `http://${myIP}:${port}`;
+    /** * This automatically detects your hosted URL.
+     * When live, it will be: https://snap-quiz-app.vercel.app/
+     */
+    const quizUrl = window.location.origin; 
 
     const handleStart = () => {
         navigate('/unlock');
@@ -22,7 +22,7 @@ export const Gateway = () => {
                     <ShieldCheck className="text-cyan-400" size={40} />
                 </div>
 
-                <h1 className="text-4xl font-black text-white tracking-tight">
+                <h1 className="text-4xl font-black text-white tracking-tight text-center">
                     SNAP <span className="text-cyan-400">QUIZ</span>
                 </h1>
 
@@ -30,6 +30,7 @@ export const Gateway = () => {
                     Scan to access the private session on your mobile device or click below to start here.
                 </p>
 
+                {/* THE QR CODE SECTION */}
                 <div className="bg-white p-5 rounded-3xl inline-block shadow-[0_0_50px_rgba(34,211,238,0.2)]">
                     <QRCodeSVG
                         value={quizUrl}
@@ -47,9 +48,12 @@ export const Gateway = () => {
                         <Cpu size={20} /> Initialize System
                     </button>
 
-                    <div className="flex items-center justify-center gap-2 text-slate-500 text-xs uppercase tracking-widest">
-                        <Smartphone size={14} />
-                        <span>Local Network: {myIP}:{port}</span>
+                    <div className="flex flex-col items-center justify-center gap-1 text-slate-500 text-[10px] uppercase tracking-widest">
+                        <div className="flex items-center gap-2">
+                           <Smartphone size={12} />
+                           {/* Replaced hardcoded IP with the actual live URL for the user */}
+                           <span>Secure Link: snap-quiz-app.vercel.app</span>
+                        </div>
                     </div>
                 </div>
             </div>
