@@ -20,7 +20,8 @@ export const Gateway = () => {
             textArea.value = mobileUrl;
             document.body.appendChild(textArea);
             textArea.select();
-            await navigator.clipboard.writeText(mobileUrl);            document.body.removeChild(textArea);
+            await navigator.clipboard.writeText(mobileUrl);            
+            document.body.removeChild(textArea);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         }
@@ -52,15 +53,13 @@ export const Gateway = () => {
                         Scan with your mobile device or copy the link to share.
                     </p>
 
-                    {/* COPY BUTTON */}
                     <button 
                         onClick={copyToClipboard}
                         className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all ${
                             copied 
                             ? 'bg-green-500/20 text-green-400 border border-green-500/50' 
                             : 'bg-slate-800 text-white hover:bg-slate-700 border border-slate-700'
-                        }`}
-                    >
+                        }`}>
                         {copied ? <Check size={18} /> : <Copy size={18} />}
                         {copied ? 'LINK COPIED' : 'COPY SESSION LINK'}
                     </button>
