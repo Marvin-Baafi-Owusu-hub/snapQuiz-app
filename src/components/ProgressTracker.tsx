@@ -13,8 +13,8 @@ export const ProgressTracker = ({ current, total }: { current: number, total: nu
           
           <div className="hidden sm:block">
             {i < current ? <CheckCircle2 className="text-green-500" size={14}/> : 
-             i === current ? <PlayCircle className="text-cyan-400 animate-pulse" size={14}/> : 
-             <Circle className="text-slate-600" size={14}/>}
+              i === current ? <PlayCircle className="text-cyan-400 animate-pulse" size={14}/> : 
+              <Circle className="text-slate-600" size={14}/>}
           </div>
         </div>
       ))}
